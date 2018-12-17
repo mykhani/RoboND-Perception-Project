@@ -55,9 +55,10 @@ robond@udacity:~$ roslaunch sensor_stick training.launch
 ```
 
 Below screenshot shows capturing process underway.
-![alt text][[capturing_features]]
+![alt text][capturing_features]
 
 Below are the results of SVM training.
+
 ![alt text][training_results]
 
 #### 8. Identifying the objects
