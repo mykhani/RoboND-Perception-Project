@@ -5,6 +5,8 @@
 [segmentation_and_clustering_1]: ./images/segmentation_and_clustering_1.png
 [segmentation_and_clustering_2]: ./images/segmentation_and_clustering_2.png
 [segmentation_and_clustering_3]: ./images/segmentation_and_clustering_1.png
+[capturing_features]: ./images/capturing_features.jpg
+[training_results]: ./images/training_results.png
 [prediction_1]: ./images/prediction_1.png
 [prediction_2]: ./images/prediction_2.png
 [prediction_3]: ./images/prediction_3.png
@@ -51,6 +53,14 @@ Clustering for world scene 3.
 ```bash
 robond@udacity:~$ roslaunch sensor_stick training.launch
 ```
+
+Below screenshot shows capturing process underway.
+![alt text][capturing_features]
+
+Below are the results of SVM training.
+
+![alt text][training_results]
+
 #### 8. Identifying the objects
 Predictions for world scene 1
 
