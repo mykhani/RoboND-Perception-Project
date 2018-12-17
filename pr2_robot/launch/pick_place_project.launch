@@ -8,6 +8,8 @@
   <rosparam command="load" file="$(find pr2_robot)/config/dropbox.yaml"/>
 
   <!--Launch a gazebo world-->
+  <!--TODO:Change the scene number to reflect the current world name-->
+  <param name="scene_num" type="int" value="1"/>
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <!--TODO:Change the world name to load different tabletop setup-->
     <arg name="world_name" value="$(find pr2_robot)/worlds/test1.world"/>
