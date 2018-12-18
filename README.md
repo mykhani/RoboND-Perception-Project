@@ -2,6 +2,10 @@
 [selecting_the_scene]: ./images/selecting_the_scene.png
 [unfiltered_input_data]: ./images/unfiltered_input_data.png
 [filtered_input_data]: ./images/filtered_input_data.png
+[voxel_filtered]: ./images/voxel_filtered_data.png
+[before_passthrough]: ./images/before_passthrough_filter.png
+[after_z_passthrough]: ./images/after_passthrough_z_axis.png
+[after_y_passthrough]: ./images/after_passthrough_y_axis.png
 [segmentation_and_clustering_1]: ./images/segmentation_and_clustering_1.png
 [segmentation_and_clustering_2]: ./images/segmentation_and_clustering_2.png
 [segmentation_and_clustering_3]: ./images/segmentation_and_clustering_3.png
@@ -21,8 +25,10 @@ Below is the snapshot of the launch file settings that need to be modified to se
 
 ![alt text][selecting_the_scene]
 
-#### 2. Voxel Downsampling of the Point Cloud Data
+#### 2. Voxel Grid Downsampling of the Point Cloud Data
+Below is the data after voxel grid downsampling.
 
+![alt text][[voxel_filtered]
 #### 3. Filtering the Noise from input camera data
 Below is the image of unfiltered raw camera input data.
 
@@ -33,8 +39,26 @@ Below is the image after applying statistical outlier filter to remove noise gra
 ![alt text][filtered_input_data]
 
 #### 4. Focusing on the regions of interest via passthrough filtering
+Below is the data before passthrough filtering.
+
+![alt text][before_passthrough]
+
+Below is the data after applying passthrough filter along z-axis.
+
+![alt text][after_z_passthrough]
+
+Below is the data after applying passthrough filter along y-axis.
+
+![alt text][after_y_passthrough]
 
 #### 5. RANSAC Segmentation
+Below is the image of outliers after applying RANSAC segmentation.
+
+![alt text]
+
+Below is the image of iniers after applying RANSAC segmentation.
+
+![alt text]
 
 #### 6. DBSCAN or Euclidean Clustering
 Clustering for world scene 1.
