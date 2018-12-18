@@ -4,7 +4,7 @@
 [filtered_input_data]: ./images/filtered_input_data.png
 [segmentation_and_clustering_1]: ./images/segmentation_and_clustering_1.png
 [segmentation_and_clustering_2]: ./images/segmentation_and_clustering_2.png
-[segmentation_and_clustering_3]: ./images/segmentation_and_clustering_1.png
+[segmentation_and_clustering_3]: ./images/segmentation_and_clustering_3.png
 [capturing_features]: ./images/capturing_features.jpg
 [training_results]: ./images/training_results.png
 [prediction_1]: ./images/prediction_1.png
