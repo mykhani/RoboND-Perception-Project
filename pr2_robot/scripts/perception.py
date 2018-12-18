@@ -64,6 +64,7 @@ def pcl_callback(pcl_msg):
     LEAF_SIZE = 0.01
     vox.set_leaf_size(LEAF_SIZE, LEAF_SIZE, LEAF_SIZE)
     cloud_filtered = vox.filter()
+    pcl_voxel_filter_pub.publish(pcl_to_ros(cloud_filtered))
     # TODO: Statistical Outlier Filtering
     outlier_filter = cloud_filtered.make_statistical_outlier_filter()
 
@@ -91,6 +92,7 @@ def pcl_callback(pcl_msg):
     z_axis_max = 1.0
     passthrough.set_filter_limits(z_axis_min, z_axis_max)
     cloud_filtered = passthrough.filter()
+    pcl_passthroughz_pub.publish(pcl_to_ros(cloud_filtered))
     
     # Cut off along y-axis
     filter_axis = 'y'
@@ -100,6 +102,7 @@ def pcl_callback(pcl_msg):
     y_axis_max = 0.5
     passthrough.set_filter_limits(y_axis_min, y_axis_max)
     cloud_filtered = passthrough.filter()
+    pcl_passthroughy_pub.publish(pcl_to_ros(cloud_filtered))
 
     # Cut off along x-axis
     filter_axis = 'x'
@@ -333,8 +336,11 @@ if __name__ == '__main__':
     # TODO: Create Publishers
     pr2_command_pub = rospy.Publisher("/pr2/world_joint_controller/command", PointCloud2, queue_size=1)
     pcl_input_pub = rospy.Publisher("/pcl_input_data", PointCloud2, queue_size=1)
+    pcl_voxel_filter_pub = rospy.Publisher("/pcl_voxel_filtered_data", PointCloud2, queue_size=1)
     pcl_noise_filtered_pub = rospy.Publisher("/pcl_noise_filtered_data", PointCloud2, queue_size=1)
     pcl_filtered_pub = rospy.Publisher("/pcl_filtered_data", PointCloud2, queue_size=1)
+    pcl_passthroughz_pub = rospy.Publisher("/pcl_passthroughz_data", PointCloud2, queue_size=1)
+    pcl_passthroughy_pub = rospy.Publisher("/pcl_passthroughy_data", PointCloud2, queue_size=1)
     pcl_objects_pub = rospy.Publisher("/pcl_objects", PointCloud2, queue_size=1)
     pcl_table_pub = rospy.Publisher("/pcl_table", PointCloud2, queue_size=1)
     pcl_cluster_pub = rospy.Publisher("/pcl_cluster", PointCloud2, queue_size=1)
