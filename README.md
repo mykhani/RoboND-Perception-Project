@@ -23,11 +23,20 @@ Please follow this link for detailed steps for setting up the environment: [link
 
 ### Implementing Image Processing Pipeline
 #### 1. Selecting the world scene
+To select a world scene, edit the pick_place_project.launch file and change the parameters accordingly.
 Below is the snapshot of the launch file settings that need to be modified to select the world scene 1,2 and 3.
 
 ![alt text][selecting_the_scene]
 
 #### 2. Voxel Grid Downsampling of the Point Cloud Data
+The computational requirement can be reduced and processing can be performed faster by reducing the number of points in point cloud in such way that they still retain useful information. This can be performed by voxel grid filtering. Below is the relevant code for voxel grid filtering.
+
+``` python
+vox = cloud.make_voxel_grid_filter()
+    LEAF_SIZE = 0.01
+    vox.set_leaf_size(LEAF_SIZE, LEAF_SIZE, LEAF_SIZE)
+    cloud_filtered = vox.filter()
+```
 Below is the data after voxel grid downsampling.
 
 ![alt text][voxel_filtered]
@@ -36,9 +45,31 @@ Below is the image of unfiltered raw camera input data.
 
 ![alt text][unfiltered_input_data]
 
-Below is the image after applying statistical outlier filter to remove noise grains.
+Below is the image after applying statistical outlier filter to remove noise grains.  
 
 ![alt text][filtered_input_data]
+
+Here is the code for statistical outlier filter.
+
+```python
+    # TODO: Statistical Outlier Filtering
+    outlier_filter = cloud_filtered.make_statistical_outlier_filter()
+
+    # Set the number of neighboring points to analyze for any given point
+    outlier_filter.set_mean_k(10)
+
+    # Set threshold scale factor
+    x = 0.015625
+
+    # Any point with a mean distance larger than global (mean distance+x*std_dev) will be considered outlier
+    outlier_filter.set_std_dev_mul_thresh(x)
+
+    # Finally call the filter function for magic
+    cloud_filtered = outlier_filter.filter()
+```
+The number of points to analyze and standard deviation fator were selected based on trial and error process. To guide the selection process, the following observations were considered:
+* The number of points cannot be very larger as to oversize the target objects themselves nor too small to have no effect.
+* There was significant distance between noise particles. Thus lowering the standard deviation threshold should effectively filter out the noise particles.
 
 #### 4. Focusing on the regions of interest via passthrough filtering
 Below is the data before passthrough filtering.
