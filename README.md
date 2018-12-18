@@ -101,3 +101,7 @@ Predictions for world scene 3
 ![alt text][prediction_3]
 
 ### Generating the output commands for Pick and Place service
+#### 1. Output YAML files
+1. [output_1.yaml](https://github.com/mykhani/RoboND-Perception-Project/blob/master/output_1.yaml)
+2. [output_2.yaml](https://github.com/mykhani/RoboND-Perception-Project/blob/master/output_2.yaml)
+3. [output_3.yaml](https://github.com/mykhani/RoboND-Perception-Project/blob/master/output_3.yaml)
