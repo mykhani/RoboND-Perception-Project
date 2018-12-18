@@ -6,6 +6,8 @@
 [before_passthrough]: ./images/before_passthrough_filter.png
 [after_z_passthrough]: ./images/after_passthrough_z_axis.png
 [after_y_passthrough]: ./images/after_passthrough_y_axis.png
+[ransac_inlier]: ./images/ransac_inlier.png
+[ransac_outlier]: ./images/ransac_outlier.png
 [segmentation_and_clustering_1]: ./images/segmentation_and_clustering_1.png
 [segmentation_and_clustering_2]: ./images/segmentation_and_clustering_2.png
 [segmentation_and_clustering_3]: ./images/segmentation_and_clustering_3.png
@@ -52,13 +54,13 @@ Below is the data after applying passthrough filter along y-axis.
 ![alt text][after_y_passthrough]
 
 #### 5. RANSAC Segmentation
+Below is the image of inliers after applying RANSAC segmentation.
+
+![alt text][ransac_inlier]
+
 Below is the image of outliers after applying RANSAC segmentation.
 
-![alt text]
-
-Below is the image of iniers after applying RANSAC segmentation.
-
-![alt text]
+![alt text][ransac_outlier]
 
 #### 6. DBSCAN or Euclidean Clustering
 Clustering for world scene 1.
