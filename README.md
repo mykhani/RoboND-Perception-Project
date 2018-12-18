@@ -174,9 +174,19 @@ Here's the relevant code.
 In the above code, the tolerance is the closeness criteria and the lower this value, the closer are points. It is worth noting that since we have used voxel grid filtering with grid size of 0.01, this tolerance value cannot be less than 0.01. We also set the minimum and maximum cluster size which rejects points that meet the closeness criteria but are less in number.
 
 #### 7. Feature extraction and training the SVM
+To train the SVM, we need to extract the features that can be used to classify objects. These features, are selected as the color and surface normal histograms. The color histogram captures the color information of the object while surface normal histogram captures the shape information of the object. To extract these features, I have used the ROS package from perception exercise 3- [link](https://github.com/udacity/RoboND-Perception-Exercises/tree/master/Exercise-3).  
 ```bash
 robond@udacity:~$ roslaunch sensor_stick training.launch
 ```
+I have used this script to capture the features. [script](https://github.com/mykhani/RoboND-Perception-Project/blob/master/pr2_robot/scripts/capture_features.py).
+
+The above script spawns the objects 200 times, at different orientations so that data of object is stored from maxmimum number of different viewing angles. The large number of samples aids in improving the accuracy of the resulting model. With only 20 samples, I achieved around 70% accuracy. Increasing the samples to 100 improved it to 89% while increasing samples to 200 showed a marginal increase resulting in accuracy of 91%. 
+
+The capture features results in file [training_set.sav](https://github.com/mykhani/RoboND-Perception-Project/blob/master/training_set.sav) containing the features data. This file contains the labeled features of all the objects i.e. it also marks the samples with the label of the object they belong to. We can use this labeled feature data to train SVM algorithm so that it can accurately create a relation or mapping between the features and a label. So that when some unalabeled features are fed to this algorithm, it can find out it's label, which is the essence of object identification.
+
+To feed the captured feature data and train the SVM model, I have used this [script](https://github.com/mykhani/RoboND-Perception-Project/blob/master/pr2_robot/scripts/train_svm.py).
+
+The resulting model is store in a file [model.sav](https://github.com/mykhani/RoboND-Perception-Project/blob/master/model.sav).
 
 Below screenshot shows capturing process underway.
 ![alt text][capturing_features]
@@ -186,6 +196,8 @@ Below are the results of SVM training.
 ![alt text][training_results]
 
 #### 8. Identifying the objects
+Here are the results of predictions performed on clustered objects.
+
 Predictions for world scene 1
 
 ![alt text][prediction_1]
