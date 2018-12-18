@@ -102,6 +102,15 @@ Predictions for world scene 3
 
 ### Generating the output commands for Pick and Place service
 #### 1. Output YAML files
-1. [output_1.yaml](https://github.com/mykhani/RoboND-Perception-Project/blob/master/output_1.yaml)
-2. [output_2.yaml](https://github.com/mykhani/RoboND-Perception-Project/blob/master/output_2.yaml)
-3. [output_3.yaml](https://github.com/mykhani/RoboND-Perception-Project/blob/master/output_3.yaml)
+[output_1.yaml](https://github.com/mykhani/RoboND-Perception-Project/blob/master/output_1.yaml)
+[output_2.yaml](https://github.com/mykhani/RoboND-Perception-Project/blob/master/output_2.yaml)
+[output_3.yaml](https://github.com/mykhani/RoboND-Perception-Project/blob/master/output_3.yaml)
+
+### SVM Model and Training Data
+[SVM Model](https://github.com/mykhani/RoboND-Perception-Project/blob/master/model.sav)
+[SVM Training Data](https://github.com/mykhani/RoboND-Perception-Project/blob/master/training_set.sav)
+
+### Limitations & Future work
+* I have observed some strange behavior where the arm moves to the correct location but is unable to grasp objects. I will investigate this behavior in future.
+* With "Linear" kernel for SVM training, I could manage to obtain only 90% accuracy. I will investigate into how to improve it further.
+* I will try to add my own publishing of 3D collision map cloud for planning out arm movment without collisions.
