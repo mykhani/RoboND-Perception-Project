@@ -30,7 +30,7 @@ Below is the snapshot of the launch file settings that need to be modified to se
 #### 2. Voxel Grid Downsampling of the Point Cloud Data
 Below is the data after voxel grid downsampling.
 
-![alt text][[voxel_filtered]
+![alt text][voxel_filtered]
 #### 3. Filtering the Noise from input camera data
 Below is the image of unfiltered raw camera input data.
 
