@@ -102,13 +102,13 @@ Predictions for world scene 3
 
 ### Output Files
 #### 1. Output YAML files
-[output_1.yaml](https://github.com/mykhani/RoboND-Perception-Project/blob/master/output_1.yaml)
-[output_2.yaml](https://github.com/mykhani/RoboND-Perception-Project/blob/master/output_2.yaml)
-[output_3.yaml](https://github.com/mykhani/RoboND-Perception-Project/blob/master/output_3.yaml)
+* [output_1.yaml](https://github.com/mykhani/RoboND-Perception-Project/blob/master/output_1.yaml)
+* [output_2.yaml](https://github.com/mykhani/RoboND-Perception-Project/blob/master/output_2.yaml)
+* [output_3.yaml](https://github.com/mykhani/RoboND-Perception-Project/blob/master/output_3.yaml)
 
 #### 2. SVM Model and Training Data
-[SVM Model](https://github.com/mykhani/RoboND-Perception-Project/blob/master/model.sav)
-[SVM Training Data](https://github.com/mykhani/RoboND-Perception-Project/blob/master/training_set.sav)
+* [SVM Model](https://github.com/mykhani/RoboND-Perception-Project/blob/master/model.sav)
+* [SVM Training Data](https://github.com/mykhani/RoboND-Perception-Project/blob/master/training_set.sav)
 
 ### Limitations & Future work
 * I have observed some strange behavior where the arm moves to the correct location but is unable to grasp objects. I will investigate this behavior in future.
