@@ -124,6 +124,21 @@ Below is the image of outliers after applying RANSAC segmentation.
 
 ![alt text][ransac_outlier]
 
+Here's the code.
+
+```python
+    # TODO: RANSAC Plane Segmentation
+    seg = cloud_filtered.make_segmenter()
+    seg.set_model_type(pcl.SACMODEL_PLANE)
+    seg.set_method_type(pcl.SAC_RANSAC)
+    max_distance = 0.01
+    seg.set_distance_threshold(max_distance)
+    # TODO: Extract inliers and outliers
+    inliers, coefficients = seg.segment()
+    cloud_table = cloud_filtered.extract(inliers, negative=False)
+    cloud_objects = cloud_filtered.extract(inliers, negative=True)
+```
+
 For our analysis, we are interested in the outliers i.e. objects placed on table.
 
 #### 6. DBSCAN or Euclidean Clustering
