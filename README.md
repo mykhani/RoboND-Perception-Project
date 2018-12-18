@@ -67,11 +67,14 @@ Here is the code for statistical outlier filter.
     # Finally call the filter function for magic
     cloud_filtered = outlier_filter.filter()
 ```
+
 The number of points to analyze and standard deviation fator were selected based on trial and error process. To guide the selection process, the following observations were considered:
 * The number of points cannot be very larger as to oversize the target objects themselves nor too small to have no effect.
 * There was significant distance between noise particles. Thus lowering the standard deviation threshold should effectively filter out the noise particles.
 
 #### 4. Focusing on the regions of interest via passthrough filtering
+The point cloud contains many redundant regions that are not useful for our processing and it's better to get rid of them. For this, I have used the passthrough filter. This filter allows to limit the cloud points between minimum and maximum cutoff points along a certain axis.
+
 Below is the data before passthrough filtering.
 
 ![alt text][before_passthrough]
@@ -80,11 +83,39 @@ Below is the data after applying passthrough filter along z-axis.
 
 ![alt text][after_z_passthrough]
 
+Here's the relevant code.
+
+```python
+# Cut off along z-axis
+    passthrough = cloud_filtered.make_passthrough_filter()
+    filter_axis = 'z'
+    passthrough.set_filter_field_name(filter_axis)
+    z_axis_min = 0.6
+    z_axis_max = 1.0
+    passthrough.set_filter_limits(z_axis_min, z_axis_max)
+    cloud_filtered = passthrough.filter()
+```
+
 Below is the data after applying passthrough filter along y-axis.
 
 ![alt text][after_y_passthrough]
 
+Here's the relevant code.
+
+```python
+# Cut off along y-axis
+    filter_axis = 'y'
+    passthrough = cloud_filtered.make_passthrough_filter()
+    passthrough.set_filter_field_name(filter_axis)
+    y_axis_min = -0.5
+    y_axis_max = 0.5
+    passthrough.set_filter_limits(y_axis_min, y_axis_max)
+    cloud_filtered = passthrough.filter()
+```
+
 #### 5. RANSAC Segmentation
+Random Sample Consensus algorithm is used to detect the table since table can be easily modeled as a plane. The RANSAN algorithm, when applied on point cloud data gives the indices of the table points which can then be used to extract inliers (table) and outliers (objects).  
+
 Below is the image of inliers after applying RANSAC segmentation.
 
 ![alt text][ransac_inlier]
@@ -93,7 +124,11 @@ Below is the image of outliers after applying RANSAC segmentation.
 
 ![alt text][ransac_outlier]
 
+For our analysis, we are interested in the outliers i.e. objects placed on table.
+
 #### 6. DBSCAN or Euclidean Clustering
+After extracting the outliers, we need to compute which points belong to a certain object in the point cloud. Since objects are placed at considerable distance apart, intuitively we know that the point that belong to a same object must lie very close together, as a cluster. To find out these points, DBSCAN which stands for Density Based Spatial Clustering for Applications with Noise. As the name implies, DBSCAN searches for points that lie close together, meeting a specific criteria for closeness. Below are the results of clustering performed on all three worlds.
+
 Clustering for world scene 1.
 
 ![alt text][segmentation_and_clustering_1]
@@ -105,6 +140,23 @@ Clustering for world scene 2.
 Clustering for world scene 3.
 
 ![alt text][segmentation_and_clustering_3]
+
+Here's the relevant code.
+
+```python
+    c = white_cloud.make_EuclideanClusterExtraction()
+    # Set tolerances for distance threshold 
+    # as well as minimum and maximum cluster size (in points)
+    ec.set_ClusterTolerance(0.02)
+    ec.set_MinClusterSize(50)
+    ec.set_MaxClusterSize(2500)
+    # Search the k-d tree for clusters
+    ec.set_SearchMethod(tree)
+    # Extract indices for each of the discovered clusters
+    cluster_indices = ec.Extract()
+```
+
+In the above code, the tolerance is the closeness criteria and the lower this value, the closer are points. It is worth noting that since we have used voxel grid filtering with grid size of 0.01, this tolerance value cannot be less than 0.01. We also set the minimum and maximum cluster size which rejects points that meet the closeness criteria but are less in number.
 
 #### 7. Feature extraction and training the SVM
 ```bash
